@@ -8,8 +8,8 @@ import markdown2
 from weasyprint import HTML
 
 # --- CONFIG ---
-MAX_TOKENS_PER_CHUNK = 2000  # For GPT-4, keep it safe
-MODEL = "gpt-4"  # or "gpt-3.5-turbo" for speed/cheaper
+MAX_TOKENS_PER_CHUNK = 6000  # For GPT-4, keep it safe
+MODEL = "gpt-3.5-turbo-16k"  # or "gpt-3.5-turbo" for speed/cheaper
 # --------------
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -51,7 +51,7 @@ def chunk_transcript(lines, max_tokens):
 
 def summarize_chunk(chunk_text, index):
     prompt = f"""
-You're a note-taking assistant. Here's part {index+1} of a lecture transcript with timestamps. Summarize the key points in 3–5 bullet points, grouped as a coherent topic section. Include the earliest timestamp.
+You're a note-taking assistant. Here's part {index+1} of a lecture transcript with timestamps. Summarize the key points into detailed bullet points, grouped as a coherent topic section. Include the earliest timestamp.
 
 Transcript:
 {chunk_text}
